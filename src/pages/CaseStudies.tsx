@@ -3,6 +3,7 @@ import { ArrowRight, TrendingUp, Search, BarChart3, Layers, ArrowUpRight } from 
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import CountUp from "@/components/CountUp";
+import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 
 const caseStudies = [
   {
