@@ -128,14 +128,21 @@ const Index = () => {
             {services.map((service, i) => (
               <AnimatedSection key={service.title} delay={i * 0.1}>
                 <motion.div
-                  whileHover={{ y: -4 }}
-                  className="bg-card border border-border rounded-2xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 group cursor-pointer"
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="bg-card border border-border rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:border-accent/30 transition-all duration-300 group cursor-pointer relative overflow-hidden"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 transition-colors">
-                    <service.icon className="text-accent" size={24} />
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:to-transparent transition-all duration-500" />
+                  <div className="relative z-10">
+                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-300">
+                      <service.icon className="text-accent group-hover:scale-110 transition-transform duration-300" size={24} />
+                    </div>
+                    <h3 className="font-heading text-xl font-semibold mb-3 group-hover:text-accent transition-colors duration-300">{service.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{service.desc}</p>
+                    <div className="mt-4 flex items-center gap-1 text-accent text-sm font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                      Learn more <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
-                  <h3 className="font-heading text-xl font-semibold mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{service.desc}</p>
                 </motion.div>
               </AnimatedSection>
             ))}
@@ -156,14 +163,18 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
             {growthSteps.map((step, i) => (
               <AnimatedSection key={step.title} delay={i * 0.15}>
-                <div className="text-center group">
-                  <div className="w-16 h-16 rounded-2xl bg-electric/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-electric/20 transition-colors">
-                    <step.icon className="text-electric" size={28} />
+                <motion.div
+                  whileHover={{ y: -8, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="text-center group cursor-pointer"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-electric/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-electric/20 group-hover:shadow-glow transition-all duration-300">
+                    <step.icon className="text-electric group-hover:scale-110 transition-transform duration-300" size={28} />
                   </div>
-                  <div className="text-xs font-semibold text-electric mb-2">0{i + 1}</div>
+                  <div className="text-xs font-semibold text-electric mb-2 group-hover:tracking-wider transition-all duration-300">0{i + 1}</div>
                   <h3 className="font-heading text-lg font-semibold mb-2">{step.title}</h3>
-                  <p className="text-primary-foreground/50 text-sm leading-relaxed">{step.desc}</p>
-                </div>
+                  <p className="text-primary-foreground/50 text-sm leading-relaxed group-hover:text-primary-foreground/70 transition-colors duration-300">{step.desc}</p>
+                </motion.div>
               </AnimatedSection>
             ))}
           </div>
@@ -198,13 +209,23 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
               <AnimatedSection key={t.name} delay={i * 0.1}>
-                <div className="bg-card border border-border rounded-2xl p-8 shadow-card">
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">"{t.text}"</p>
-                  <div>
-                    <div className="font-heading font-semibold text-sm">{t.name}</div>
-                    <div className="text-xs text-muted-foreground">{t.role}</div>
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="bg-card border border-border rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:border-accent/20 transition-all duration-300 group h-full"
+                >
+                  <div className="text-accent/30 text-4xl font-heading font-bold leading-none mb-3 group-hover:text-accent/50 transition-colors duration-300">"</div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">{t.text}</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center text-accent font-heading font-bold text-sm group-hover:bg-accent/20 transition-colors duration-300">
+                      {t.name[0]}
+                    </div>
+                    <div>
+                      <div className="font-heading font-semibold text-sm">{t.name}</div>
+                      <div className="text-xs text-muted-foreground">{t.role}</div>
+                    </div>
                   </div>
-                </div>
+                </motion.div>
               </AnimatedSection>
             ))}
           </div>
