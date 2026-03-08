@@ -25,7 +25,7 @@ const Contact = () => {
 
       <section className="py-24">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-5xl mx-auto bg-card border border-border rounded-3xl p-8 md:p-12 shadow-card">
             <AnimatedSection>
               <h2 className="text-2xl md:text-3xl font-heading font-bold mb-6">Get Your Free Growth Audit</h2>
               <p className="text-muted-foreground leading-relaxed mb-8">

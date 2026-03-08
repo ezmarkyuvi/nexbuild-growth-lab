@@ -23,7 +23,7 @@ const About = () => (
     <section className="py-24">
       <div className="container mx-auto px-4 lg:px-8">
         <AnimatedSection>
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-3xl mx-auto bg-card border border-border rounded-3xl p-8 md:p-12 shadow-card text-center">
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Our Mission</h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
               To democratize growth by giving startups and businesses access to enterprise-grade marketing systems, 
