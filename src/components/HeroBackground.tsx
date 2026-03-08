@@ -92,8 +92,8 @@ const HeroBackground = () => {
       const ox = w * (0.2 + k * 0.3) + Math.sin(time * 0.5 + k * 2) * 60;
       const oy = h * (0.3 + k * 0.15) + Math.cos(time * 0.4 + k * 1.5) * 40;
       const gradient = ctx.createRadialGradient(ox, oy, 0, ox, oy, 120 + k * 30);
-      gradient.addColorStop(0, k === 1 ? "rgba(139, 92, 246, 0.08)" : "rgba(59, 130, 246, 0.08)");
-      gradient.addColorStop(1, "rgba(59, 130, 246, 0)");
+      gradient.addColorStop(0, k === 1 ? "rgba(204, 60, 30, 0.08)" : "rgba(234, 120, 28, 0.08)");
+      gradient.addColorStop(1, "rgba(234, 120, 28, 0)");
       ctx.beginPath();
       ctx.arc(ox, oy, 120 + k * 30, 0, Math.PI * 2);
       ctx.fillStyle = gradient;
