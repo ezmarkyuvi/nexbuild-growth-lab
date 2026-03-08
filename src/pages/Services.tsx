@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Search, BarChart3, Globe, FileText, ArrowRight, CheckCircle, Layers } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
+import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 
 const services = [
   {
