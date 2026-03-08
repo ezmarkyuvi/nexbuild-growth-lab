@@ -39,7 +39,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="font-heading font-semibold text-sm">Email Us</div>
-                    <a href="mailto:hello@nexbuildlabs.com" className="text-sm text-accent hover:underline">hello@nexbuildlabs.com</a>
+                    <a href="mailto:contact.nexbuildlabs@gmail.com" className="text-sm text-accent hover:underline">contact.nexbuildlabs@gmail.com</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
