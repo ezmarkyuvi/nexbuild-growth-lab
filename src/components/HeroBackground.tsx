@@ -44,7 +44,7 @@ const HeroBackground = () => {
 
         ctx.beginPath();
         ctx.arc(x + offsetX, y + offsetY, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(59, 130, 246, ${alpha})`;
+        ctx.fillStyle = `rgba(234, 120, 28, ${alpha})`;
         ctx.fill();
 
         // Draw connecting lines near mouse
