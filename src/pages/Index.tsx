@@ -151,36 +151,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Growth System */}
-      <section className="py-24 bg-navy text-primary-foreground">
-        <div className="container mx-auto px-4 lg:px-8">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
-              The NexBuildLabs <span className="text-electric">Growth System</span>
-            </h2>
-            <p className="text-primary-foreground/60 max-w-xl mx-auto">Our proven 5-step framework for predictable, scalable growth.</p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            {growthSteps.map((step, i) => (
-              <AnimatedSection key={step.title} delay={i * 0.15}>
-                <motion.div
-                  whileHover={{ y: -8, scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="text-center group cursor-pointer"
-                >
-                  <div className="w-16 h-16 rounded-2xl bg-electric/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-electric/20 group-hover:shadow-glow transition-all duration-300">
-                    <step.icon className="text-electric group-hover:scale-110 transition-transform duration-300" size={28} />
-                  </div>
-                  <div className="text-xs font-semibold text-electric mb-2 group-hover:tracking-wider transition-all duration-300">0{i + 1}</div>
-                  <h3 className="font-heading text-lg font-semibold mb-2">{step.title}</h3>
-                  <p className="text-primary-foreground/50 text-sm leading-relaxed group-hover:text-primary-foreground/70 transition-colors duration-300">{step.desc}</p>
-                </motion.div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Growth System - Horizontal Scroll */}
+      <HorizontalScrollSection />
 
       {/* Metrics */}
       <section className="py-24">
