@@ -37,22 +37,22 @@ const socials = [
   },
 ];
 
-// Scattered start positions (fixed, not random, to avoid hydration issues)
+// Scattered start positions — wide spread
 const scatteredPositions = [
-  { x: -280, y: -180, rotation: -25 },
-  { x: 300, y: -150, rotation: 30 },
-  { x: -320, y: 120, rotation: -40 },
-  { x: 260, y: 160, rotation: 20 },
-  { x: -50, y: -220, rotation: 15 },
+  { x: -450, y: -250, rotation: -35 },
+  { x: 480, y: -200, rotation: 40 },
+  { x: -500, y: 200, rotation: -50 },
+  { x: 420, y: 230, rotation: 25 },
+  { x: -80, y: -320, rotation: 20 },
 ];
 
-// Final positions around browser window (circular arrangement)
+// Final positions around browser window
 const finalPositions = [
-  { x: -180, y: -100 },
-  { x: 180, y: -100 },
-  { x: -200, y: 80 },
-  { x: 200, y: 80 },
-  { x: 0, y: -160 },
+  { x: -340, y: -120 },
+  { x: 340, y: -120 },
+  { x: -380, y: 100 },
+  { x: 380, y: 100 },
+  { x: 0, y: -200 },
 ];
 
 const ConnectWithUs = () => {
