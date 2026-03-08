@@ -51,6 +51,9 @@ const Blog = () => (
         </div>
       </div>
     </section>
+
+    {/* Growth System - Horizontal Scroll */}
+    <HorizontalScrollSection />
   </div>
 );
 

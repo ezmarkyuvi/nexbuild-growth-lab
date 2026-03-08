@@ -211,6 +211,9 @@ const CaseStudies = () => (
       </section>
     ))}
 
+    {/* Growth System - Horizontal Scroll */}
+    <HorizontalScrollSection />
+
     {/* CTA */}
     <section className="py-24">
       <div className="container mx-auto px-4 lg:px-8">
