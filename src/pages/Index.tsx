@@ -128,14 +128,21 @@ const Index = () => {
             {services.map((service, i) => (
               <AnimatedSection key={service.title} delay={i * 0.1}>
                 <motion.div
-                  whileHover={{ y: -4 }}
-                  className="bg-card border border-border rounded-2xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 group cursor-pointer"
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="bg-card border border-border rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:border-accent/30 transition-all duration-300 group cursor-pointer relative overflow-hidden"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 transition-colors">
-                    <service.icon className="text-accent" size={24} />
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:to-transparent transition-all duration-500" />
+                  <div className="relative z-10">
+                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-300">
+                      <service.icon className="text-accent group-hover:scale-110 transition-transform duration-300" size={24} />
+                    </div>
+                    <h3 className="font-heading text-xl font-semibold mb-3 group-hover:text-accent transition-colors duration-300">{service.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{service.desc}</p>
+                    <div className="mt-4 flex items-center gap-1 text-accent text-sm font-medium opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                      Learn more <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
-                  <h3 className="font-heading text-xl font-semibold mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{service.desc}</p>
                 </motion.div>
               </AnimatedSection>
             ))}
