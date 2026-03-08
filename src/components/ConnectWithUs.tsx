@@ -1,4 +1,4 @@
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -37,66 +37,72 @@ const socials = [
   },
 ];
 
+// Scattered start positions (fixed, not random, to avoid hydration issues)
+const scatteredPositions = [
+  { x: -280, y: -180, rotation: -25 },
+  { x: 300, y: -150, rotation: 30 },
+  { x: -320, y: 120, rotation: -40 },
+  { x: 260, y: 160, rotation: 20 },
+  { x: -50, y: -220, rotation: 15 },
+];
+
+// Final positions around browser window (circular arrangement)
+const finalPositions = [
+  { x: -180, y: -100 },
+  { x: 180, y: -100 },
+  { x: -200, y: 80 },
+  { x: 200, y: 80 },
+  { x: 0, y: -160 },
+];
+
 const ConnectWithUs = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const iconsRef = useRef<(HTMLAnchorElement | null)[]>([]);
-
-  // Generate stable random positions once
-  const randomPositions = useMemo(
-    () =>
-      socials.map(() => ({
-        x: (Math.random() - 0.5) * 600,
-        y: (Math.random() - 0.5) * 400,
-        rotation: Math.random() * 360,
-        scale: 0.6 + Math.random() * 0.4,
-      })),
-    []
-  );
+  const containerRef = useRef<HTMLDivElement>(null);
+  const iconRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const icons = iconsRef.current.filter(Boolean);
+    const icons = iconRefs.current.filter(Boolean) as HTMLAnchorElement[];
     if (!section || icons.length === 0) return;
 
-    // Set initial scattered positions
+    // Set scattered start positions immediately
     icons.forEach((icon, i) => {
+      const pos = scatteredPositions[i];
       gsap.set(icon, {
-        x: randomPositions[i].x,
-        y: randomPositions[i].y,
-        rotation: randomPositions[i].rotation,
-        scale: randomPositions[i].scale,
-        opacity: 0.4,
+        x: pos.x,
+        y: pos.y,
+        rotation: pos.rotation,
+        scale: 0.5,
+        opacity: 0.3,
       });
     });
 
-    const ctx = gsap.context(() => {
-      // Animate icons to center on scroll
-      icons.forEach((icon, i) => {
-        // Target positions around the browser window
-        const angle = (i / socials.length) * Math.PI * 2 - Math.PI / 2;
-        const radius = 140;
-        const targetX = Math.cos(angle) * radius;
-        const targetY = Math.sin(angle) * radius;
+    // Create scroll-triggered animation for each icon
+    const triggers: ScrollTrigger[] = [];
 
-        gsap.to(icon, {
-          x: targetX,
-          y: targetY,
-          rotation: 0,
-          scale: 1,
-          opacity: 1,
-          ease: "elastic.out(1, 0.5)",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            end: "top 20%",
-            scrub: 1,
-          },
-        });
+    icons.forEach((icon, i) => {
+      const final = finalPositions[i];
+      const tween = gsap.to(icon, {
+        x: final.x,
+        y: final.y,
+        rotation: 0,
+        scale: 1,
+        opacity: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 85%",
+          end: "center center",
+          scrub: 0.8,
+        },
       });
-    }, section);
+      if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
+    });
 
-    return () => ctx.revert();
-  }, [randomPositions]);
+    return () => {
+      triggers.forEach((t) => t.kill());
+    };
+  }, []);
 
   return (
     <section
@@ -119,7 +125,7 @@ const ConnectWithUs = () => {
         </p>
 
         {/* Central browser window + orbiting icons */}
-        <div className="relative flex items-center justify-center min-h-[420px]">
+        <div ref={containerRef} className="relative flex items-center justify-center" style={{ minHeight: "420px" }}>
           {/* Browser window */}
           <div className="relative w-72 md:w-96 bg-card border border-border rounded-2xl shadow-card overflow-hidden z-10">
             {/* Title bar */}
@@ -156,13 +162,12 @@ const ConnectWithUs = () => {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              ref={(el) => { iconsRef.current[i] = el; }}
+              ref={(el) => { iconRefs.current[i] = el; }}
               className="absolute z-20 group cursor-pointer"
+              style={{ top: "50%", left: "50%", marginTop: "-28px", marginLeft: "-28px" }}
               aria-label={social.name}
             >
-              <div
-                className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-card border border-border shadow-card flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow group-hover:border-accent/30"
-              >
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-card border border-border shadow-card flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow group-hover:border-accent/30">
                 <svg
                   viewBox="0 0 24 24"
                   className="w-6 h-6 md:w-7 md:h-7 transition-colors duration-300"
