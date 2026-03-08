@@ -61,7 +61,7 @@ const HeroBackground = () => {
               ctx.beginPath();
               ctx.moveTo(x + offsetX, y + offsetY);
               ctx.lineTo(nx + nInfluence * ndx * 0.08, ny + nInfluence * ndy * 0.08);
-              ctx.strokeStyle = `rgba(59, 130, 246, ${Math.min(influence, nInfluence) * 0.2})`;
+              ctx.strokeStyle = `rgba(234, 120, 28, ${Math.min(influence, nInfluence) * 0.2})`;
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
