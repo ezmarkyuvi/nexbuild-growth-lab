@@ -37,22 +37,22 @@ const socials = [
   },
 ];
 
-// Scattered start positions (fixed, not random, to avoid hydration issues)
+// Scattered start positions — wide spread
 const scatteredPositions = [
-  { x: -280, y: -180, rotation: -25 },
-  { x: 300, y: -150, rotation: 30 },
-  { x: -320, y: 120, rotation: -40 },
-  { x: 260, y: 160, rotation: 20 },
-  { x: -50, y: -220, rotation: 15 },
+  { x: -450, y: -250, rotation: -35 },
+  { x: 480, y: -200, rotation: 40 },
+  { x: -500, y: 200, rotation: -50 },
+  { x: 420, y: 230, rotation: 25 },
+  { x: -80, y: -320, rotation: 20 },
 ];
 
-// Final positions around browser window (circular arrangement)
+// Final positions around browser window
 const finalPositions = [
-  { x: -180, y: -100 },
-  { x: 180, y: -100 },
-  { x: -200, y: 80 },
-  { x: 200, y: 80 },
-  { x: 0, y: -160 },
+  { x: -340, y: -120 },
+  { x: 340, y: -120 },
+  { x: -380, y: 100 },
+  { x: 380, y: 100 },
+  { x: 0, y: -200 },
 ];
 
 const ConnectWithUs = () => {
@@ -88,12 +88,12 @@ const ConnectWithUs = () => {
         rotation: 0,
         scale: 1,
         opacity: 1,
-        ease: "power3.out",
+        ease: "power2.inOut",
         scrollTrigger: {
           trigger: section,
-          start: "top 85%",
-          end: "center center",
-          scrub: 0.8,
+          start: "top 90%",
+          end: "bottom 60%",
+          scrub: 2.5,
         },
       });
       if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
@@ -125,9 +125,9 @@ const ConnectWithUs = () => {
         </p>
 
         {/* Central browser window + orbiting icons */}
-        <div ref={containerRef} className="relative flex items-center justify-center" style={{ minHeight: "420px" }}>
-          {/* Browser window */}
-          <div className="relative w-72 md:w-96 bg-card border border-border rounded-2xl shadow-card overflow-hidden z-10">
+        <div ref={containerRef} className="relative flex items-center justify-center" style={{ minHeight: "500px" }}>
+          {/* Browser window — full width */}
+          <div className="relative w-full max-w-3xl bg-card border border-border rounded-2xl shadow-card overflow-hidden z-10">
             {/* Title bar */}
             <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/50">
               <div className="flex gap-1.5">
