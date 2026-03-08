@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import DarkHero from "@/components/DarkHero";
 
 const posts = [
   { title: "The Complete Guide to SEO in 2026", excerpt: "Everything you need to know about ranking in today's search landscape, from technical SEO to AI-driven content strategies.", category: "SEO", slug: "#" },
