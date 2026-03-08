@@ -172,37 +172,44 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 bg-secondary">
+      <section className="py-24 bg-secondary overflow-hidden">
         <div className="container mx-auto px-4 lg:px-8">
           <AnimatedSection className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
               What Our <span className="text-gradient">Clients Say</span>
             </h2>
           </AnimatedSection>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <AnimatedSection key={t.name} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="bg-card border border-border rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:border-accent/20 transition-all duration-300 group h-full"
-                >
-                  <div className="text-accent/30 text-4xl font-heading font-bold leading-none mb-3 group-hover:text-accent/50 transition-colors duration-300">"</div>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">{t.text}</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center text-accent font-heading font-bold text-sm group-hover:bg-accent/20 transition-colors duration-300">
-                      {t.name[0]}
-                    </div>
-                    <div>
-                      <div className="font-heading font-semibold text-sm">{t.name}</div>
-                      <div className="text-xs text-muted-foreground">{t.role}</div>
-                    </div>
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
+          <motion.div
+            className="flex gap-6"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          >
+            {[...testimonials, ...testimonials].map((t, i) => (
+              <motion.div
+                key={`${t.name}-${i}`}
+                whileHover={{ y: -4, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="flex-shrink-0 w-[350px] md:w-[400px] bg-card border border-border rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:border-accent/20 transition-all duration-300 group"
+              >
+                <div className="text-accent/30 text-4xl font-heading font-bold leading-none mb-3 group-hover:text-accent/50 transition-colors duration-300">"</div>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">{t.text}</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center text-accent font-heading font-bold text-sm group-hover:bg-accent/20 transition-colors duration-300">
+                    {t.name[0]}
                   </div>
-                </motion.div>
-              </AnimatedSection>
+                  <div>
+                    <div className="font-heading font-semibold text-sm">{t.name}</div>
+                    <div className="text-xs text-muted-foreground">{t.role}</div>
+                  </div>
+                </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
