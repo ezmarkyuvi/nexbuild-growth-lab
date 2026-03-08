@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import DarkHero from "@/components/DarkHero";
 
 const posts = [
   { title: "The Complete Guide to SEO in 2026", excerpt: "Everything you need to know about ranking in today's search landscape, from technical SEO to AI-driven content strategies.", category: "SEO", slug: "#" },
@@ -13,18 +14,12 @@ const posts = [
 
 const Blog = () => (
   <div className="min-h-screen pt-16">
-    <section className="py-24 bg-gradient-hero relative">
-      <div className="container mx-auto px-4 lg:px-8 text-center">
-        <AnimatedSection>
-          <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">
-            Growth <span className="text-gradient">Blog</span>
-          </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Insights, strategies, and tactics from the NexBuildLabs growth team.
-          </p>
-        </AnimatedSection>
-      </div>
-    </section>
+    <DarkHero
+      badge="Insights & Tactics"
+      badgeIcon={<BookOpen size={14} className="text-electric" />}
+      title={<>Growth <span className="text-electric">Blog</span></>}
+      subtitle="Insights, strategies, and tactics from the NexBuildLabs growth team."
+    />
 
     <section className="py-24">
       <div className="container mx-auto px-4 lg:px-8">

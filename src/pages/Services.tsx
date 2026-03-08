@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { Search, BarChart3, Globe, FileText, ArrowRight, CheckCircle } from "lucide-react";
+import { Search, BarChart3, Globe, FileText, ArrowRight, CheckCircle, Layers } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import DarkHero from "@/components/DarkHero";
 
 const services = [
   {
@@ -40,18 +41,12 @@ const services = [
 const Services = () => (
   <div className="min-h-screen pt-16">
     {/* Hero */}
-    <section className="py-24 bg-gradient-hero relative">
-      <div className="container mx-auto px-4 lg:px-8 text-center">
-        <AnimatedSection>
-          <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">
-            Our <span className="text-gradient">Services</span>
-          </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            End-to-end digital growth services designed to generate measurable, scalable results.
-          </p>
-        </AnimatedSection>
-      </div>
-    </section>
+    <DarkHero
+      badge="Our Expertise"
+      badgeIcon={<Layers size={14} className="text-electric" />}
+      title={<>Our <span className="text-electric">Services</span></>}
+      subtitle="End-to-end digital growth services designed to generate measurable, scalable results."
+    />
 
     {/* Services */}
     {services.map((service, i) => (

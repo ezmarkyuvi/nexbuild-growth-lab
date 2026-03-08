@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { ArrowRight, Mail, Send } from "lucide-react";
+import { ArrowRight, Mail, Send, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
+import DarkHero from "@/components/DarkHero";
 import { toast } from "sonner";
 
 const Contact = () => {
@@ -15,18 +16,12 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen pt-16">
-      <section className="py-24 bg-gradient-hero relative">
-        <div className="container mx-auto px-4 lg:px-8 text-center">
-          <AnimatedSection>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">
-              Let's <span className="text-gradient">Talk Growth</span>
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Ready to scale your business? Get in touch for a free growth audit.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
+      <DarkHero
+        badge="Get In Touch"
+        badgeIcon={<MessageCircle size={14} className="text-electric" />}
+        title={<>Let's <span className="text-electric">Talk Growth</span></>}
+        subtitle="Ready to scale your business? Get in touch for a free growth audit."
+      />
 
       <section className="py-24">
         <div className="container mx-auto px-4 lg:px-8">
