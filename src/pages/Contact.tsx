@@ -55,7 +55,7 @@ const Contact = () => {
             </AnimatedSection>
 
             <AnimatedSection delay={0.1}>
-              <form onSubmit={handleSubmit} className="bg-card border border-border rounded-2xl p-8 shadow-card space-y-5">
+              <form onSubmit={handleSubmit} className="bg-secondary border border-border rounded-2xl p-8 space-y-5">
                 {[
                   { label: "Name", key: "name", type: "text", placeholder: "Your full name" },
                   { label: "Email", key: "email", type: "email", placeholder: "you@company.com" },
