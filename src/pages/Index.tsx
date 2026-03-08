@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Search, BarChart3, Globe, FileText, Zap, FlaskConical, Target, TrendingUp, Rocket } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
