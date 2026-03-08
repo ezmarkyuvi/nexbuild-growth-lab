@@ -3,6 +3,7 @@ import { ArrowRight, TrendingUp, Search, BarChart3, Layers, ArrowUpRight } from 
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import CountUp from "@/components/CountUp";
+import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 
 const caseStudies = [
   {
@@ -209,6 +210,9 @@ const CaseStudies = () => (
         </div>
       </section>
     ))}
+
+    {/* Growth System - Horizontal Scroll */}
+    <HorizontalScrollSection />
 
     {/* CTA */}
     <section className="py-24">
