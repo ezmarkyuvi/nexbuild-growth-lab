@@ -13,8 +13,8 @@ const FloatingDashboard = () => {
         {/* Window bar */}
         <div className="flex items-center gap-2 px-4 py-3 border-b border-border/40">
           <div className="w-3 h-3 rounded-full bg-destructive/60" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
-          <div className="w-3 h-3 rounded-full bg-green-400/60" />
+          <div className="w-3 h-3 rounded-full bg-accent/40" />
+          <div className="w-3 h-3 rounded-full bg-electric-glow/60" />
           <div className="flex-1 text-center">
             <span className="text-[10px] text-muted-foreground/50 font-mono">nexbuildlabs.com/dashboard</span>
           </div>
