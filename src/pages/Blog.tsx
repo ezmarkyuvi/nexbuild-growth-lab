@@ -3,7 +3,6 @@ import { ArrowRight, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
-import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 
 const posts = [
   { title: "The Complete Guide to SEO in 2026", excerpt: "Everything you need to know about ranking in today's search landscape, from technical SEO to AI-driven content strategies.", category: "SEO", slug: "#" },
@@ -51,9 +50,6 @@ const Blog = () => (
         </div>
       </div>
     </section>
-
-    {/* Growth System - Horizontal Scroll */}
-    <HorizontalScrollSection />
   </div>
 );
 
