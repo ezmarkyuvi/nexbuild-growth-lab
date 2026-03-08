@@ -219,54 +219,9 @@ const GrowthEngine = () => {
             </div>
           </motion.div>
 
-          {/* Floating channel icons */}
+          {/* Floating channel icons — scroll-driven */}
           {channels.map((channel, i) => (
-            <motion.a
-              key={channel.name}
-              href={channel.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute z-20 group cursor-pointer"
-              style={{ top: "50%", left: "50%", marginTop: "-28px", marginLeft: "-28px" }}
-              initial={{
-                x: channel.start.x,
-                y: channel.start.y,
-                scale: 0.4,
-                opacity: 0,
-                rotate: (i % 2 === 0 ? -1 : 1) * 30,
-              }}
-              animate={
-                isInView
-                  ? {
-                      x: channel.end.x,
-                      y: channel.end.y,
-                      scale: 1,
-                      opacity: 1,
-                      rotate: 0,
-                    }
-                  : {}
-              }
-              transition={{
-                type: "spring",
-                stiffness: 80,
-                damping: 12,
-                mass: 1.2,
-                delay: 0.4 + i * 0.12,
-              }}
-              aria-label={channel.name}
-            >
-              <div
-                className="w-11 h-11 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-card/10 border border-border/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow group-hover:border-accent/30 group-hover:bg-card/20 text-primary-foreground/70"
-                style={{ ["--hover-color" as string]: channel.brandColor }}
-              >
-                <div className="group-hover:text-accent transition-colors duration-300">
-                  {channel.icon}
-                </div>
-              </div>
-              <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-primary-foreground/40 group-hover:text-accent/80 transition-colors duration-300 whitespace-nowrap">
-                {channel.name}
-              </span>
-            </motion.a>
+            <ScrollChannelIcon key={channel.name} channel={channel} index={i} sectionRef={sectionRef as React.RefObject<HTMLDivElement>} />
           ))}
 
           {/* Central glow pulse */}
