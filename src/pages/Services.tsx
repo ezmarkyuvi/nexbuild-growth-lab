@@ -53,6 +53,7 @@ const Services = () => (
       <section key={service.title} className={`py-24 ${i % 2 === 1 ? "bg-secondary" : ""}`}>
         <div className="container mx-auto px-4 lg:px-8">
           <AnimatedSection>
+            <div className="bg-card border border-border rounded-3xl p-8 md:p-12 shadow-card">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
@@ -88,6 +89,7 @@ const Services = () => (
                   </ol>
                 </div>
               </div>
+            </div>
             </div>
           </AnimatedSection>
         </div>
