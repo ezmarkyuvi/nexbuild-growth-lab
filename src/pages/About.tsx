@@ -12,18 +12,12 @@ const values = [
 
 const About = () => (
   <div className="min-h-screen pt-16">
-    <section className="py-24 bg-gradient-hero relative">
-      <div className="container mx-auto px-4 lg:px-8 text-center">
-        <AnimatedSection>
-          <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">
-            About <span className="text-gradient">NexBuildLabs</span>
-          </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            We're a digital growth lab on a mission to help ambitious businesses scale through data-driven marketing systems.
-          </p>
-        </AnimatedSection>
-      </div>
-    </section>
+    <DarkHero
+      badge="Who We Are"
+      badgeIcon={<Beaker size={14} className="text-electric" />}
+      title={<>About <span className="text-electric">NexBuildLabs</span></>}
+      subtitle="We're a digital growth lab on a mission to help ambitious businesses scale through data-driven marketing systems."
+    />
 
     {/* Mission */}
     <section className="py-24">
