@@ -23,7 +23,7 @@ const About = () => (
     <section className="py-24">
       <div className="container mx-auto px-4 lg:px-8">
         <AnimatedSection>
-          <div className="max-w-3xl mx-auto bg-card border border-border rounded-3xl p-8 md:p-12 shadow-card text-center">
+          <div className="max-w-3xl mx-auto bg-card border border-border rounded-3xl p-8 md:p-12 shadow-card hover:shadow-card-hover hover:border-accent/20 hover:-translate-y-1 transition-all duration-300 text-center">
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Our Mission</h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
               To democratize growth by giving startups and businesses access to enterprise-grade marketing systems, 
@@ -45,7 +45,7 @@ const About = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {values.map((v, i) => (
             <AnimatedSection key={v.title} delay={i * 0.1}>
-              <div className="bg-card border border-border rounded-2xl p-8 shadow-card h-full">
+              <div className="bg-card border border-border rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:border-accent/20 hover:-translate-y-1 transition-all duration-300 h-full">
                 <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
                   <v.icon className="text-accent" size={24} />
                 </div>
