@@ -90,6 +90,7 @@ const Services = () => (
                 </div>
               </div>
             </div>
+            </div>
           </AnimatedSection>
         </div>
       </section>
