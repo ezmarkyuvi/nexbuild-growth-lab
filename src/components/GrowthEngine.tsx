@@ -220,7 +220,7 @@ const GrowthEngine = () => {
               aria-label={channel.name}
             >
               <div
-                className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-card/10 border border-border/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow group-hover:border-accent/30 group-hover:bg-card/20 text-primary-foreground/70"
+                className="w-11 h-11 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-card/10 border border-border/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow group-hover:border-accent/30 group-hover:bg-card/20 text-primary-foreground/70"
                 style={{ ["--hover-color" as string]: channel.brandColor }}
               >
                 <div className="group-hover:text-accent transition-colors duration-300">
