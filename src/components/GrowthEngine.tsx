@@ -179,9 +179,12 @@ const GrowthEngine = () => {
 
           {/* Floating channel icons */}
           {channels.map((channel, i) => (
-            <motion.div
+            <motion.a
               key={channel.name}
-              className="absolute z-20 group cursor-default"
+              href={channel.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute z-20 group cursor-pointer"
               style={{ top: "50%", left: "50%", marginTop: "-28px", marginLeft: "-28px" }}
               initial={{
                 x: channel.start.x,
@@ -208,14 +211,20 @@ const GrowthEngine = () => {
                 mass: 1.2,
                 delay: 0.4 + i * 0.12,
               }}
+              aria-label={channel.name}
             >
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-card/10 border border-border/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow group-hover:border-accent/30 group-hover:bg-card/20 text-primary-foreground/70 group-hover:text-accent">
-                {channel.icon}
+              <div
+                className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-card/10 border border-border/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow group-hover:border-accent/30 group-hover:bg-card/20 text-primary-foreground/70"
+                style={{ ["--hover-color" as string]: channel.brandColor }}
+              >
+                <div className="group-hover:text-accent transition-colors duration-300">
+                  {channel.icon}
+                </div>
               </div>
               <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-primary-foreground/40 group-hover:text-accent/80 transition-colors duration-300 whitespace-nowrap">
                 {channel.name}
               </span>
-            </motion.div>
+            </motion.a>
           ))}
 
           {/* Central glow pulse */}
