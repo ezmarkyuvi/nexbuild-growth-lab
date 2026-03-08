@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Search, BarChart3, Globe, FileText, Zap, FlaskConical, Target, TrendingUp, Rocket } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import CountUp from "@/components/CountUp";
+import HeroBackground from "@/components/HeroBackground";
+import FloatingDashboard from "@/components/FloatingDashboard";
 
 const services = [
   { icon: Search, title: "Search Engine Optimization", desc: "Dominate organic search with data-backed SEO strategies that drive sustainable traffic growth." },
@@ -30,28 +32,29 @@ const Index = () => {
     <div className="min-h-screen">
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-        {/* Animated background */}
-        <div className="absolute inset-0 bg-gradient-hero" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-electric/10 rounded-full blur-3xl animate-pulse-glow" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "2s" }} />
+        {/* Interactive canvas background */}
+        <HeroBackground />
+        
+        {/* Ambient gradient layers */}
+        <div className="absolute inset-0 bg-gradient-hero pointer-events-none" />
 
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
             >
-              <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 mb-8">
+              <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 mb-8 backdrop-blur-sm">
                 <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
                 <span className="text-xs font-medium text-accent">Digital Growth Lab</span>
               </div>
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
+              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
               className="text-4xl sm:text-5xl md:text-7xl font-heading font-bold tracking-tight leading-[1.1] mb-6"
             >
               We Build, Test, and Scale{" "}
@@ -59,52 +62,45 @@ const Index = () => {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.8, delay: 0.3 }}
               className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
             >
               NexBuildLabs helps startups and businesses grow using data-driven marketing systems, performance advertising, and scalable digital strategies.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.8, delay: 0.45 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
-              <Link
-                to="/contact"
-                className="bg-gradient-primary text-accent-foreground px-8 py-3.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-all hover:shadow-glow flex items-center gap-2 group"
-              >
-                Get a Free Growth Audit
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              <Link to="/contact">
+                <motion.div
+                  whileHover={{ scale: 1.04, boxShadow: "0 0 40px rgba(59, 130, 246, 0.3)" }}
+                  whileTap={{ scale: 0.97 }}
+                  className="bg-gradient-primary text-accent-foreground px-8 py-3.5 rounded-xl text-sm font-semibold flex items-center gap-2 group"
+                >
+                  Get a Free Growth Audit
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </motion.div>
               </Link>
-              <Link
-                to="/services"
-                className="border border-border text-foreground px-8 py-3.5 rounded-xl text-sm font-semibold hover:bg-secondary transition-colors"
-              >
-                View Services
+              <Link to="/services">
+                <motion.div
+                  whileHover={{ scale: 1.04, backgroundColor: "hsl(var(--secondary))" }}
+                  whileTap={{ scale: 0.97 }}
+                  className="border border-border text-foreground px-8 py-3.5 rounded-xl text-sm font-semibold transition-colors"
+                >
+                  View Services
+                </motion.div>
               </Link>
             </motion.div>
+
+            {/* Floating Dashboard Mockup */}
+            <FloatingDashboard />
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-1.5">
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1.5 h-1.5 bg-accent rounded-full"
-            />
-          </div>
-        </motion.div>
       </section>
 
       {/* Trust / Social Proof */}
