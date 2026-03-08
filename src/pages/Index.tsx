@@ -1,8 +1,10 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Search, BarChart3, Globe, FileText, Zap, FlaskConical, Target, TrendingUp, Rocket } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import CountUp from "@/components/CountUp";
+import HeroBackground from "@/components/HeroBackground";
+import FloatingDashboard from "@/components/FloatingDashboard";
 
 const services = [
   { icon: Search, title: "Search Engine Optimization", desc: "Dominate organic search with data-backed SEO strategies that drive sustainable traffic growth." },
