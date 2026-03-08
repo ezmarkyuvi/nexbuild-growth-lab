@@ -47,16 +47,18 @@ const cards = [
 const HorizontalScrollSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     const trigger = triggerRef.current;
     if (!section || !trigger) return;
 
-    const totalScroll = section.scrollWidth - trigger.offsetWidth;
+    // Small delay to ensure DOM is fully ready
+    const timer = setTimeout(() => {
+      const totalScroll = section.scrollWidth - trigger.offsetWidth;
 
-    const ctx = gsap.context(() => {
-      gsap.to(section, {
+      const tween = gsap.to(section, {
         x: -totalScroll,
         ease: "none",
         scrollTrigger: {
@@ -69,9 +71,19 @@ const HorizontalScrollSection = () => {
           invalidateOnRefresh: true,
         },
       });
-    }, trigger);
 
-    return () => ctx.revert();
+      tweenRef.current = tween;
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      if (tweenRef.current) {
+        const st = tweenRef.current.scrollTrigger;
+        if (st) st.kill();
+        tweenRef.current.kill();
+      }
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
   }, []);
 
   return (
