@@ -37,7 +37,7 @@ const FloatingDashboard = () => {
             >
               <div className="text-[10px] text-muted-foreground mb-1">{metric.label}</div>
               <div className="font-heading font-bold text-lg">{metric.value}</div>
-              <div className="text-[10px] text-green-500 font-medium">{metric.change}</div>
+              <div className="text-[10px] text-accent font-medium">{metric.change}</div>
             </motion.div>
           ))}
 
