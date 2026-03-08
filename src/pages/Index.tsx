@@ -6,6 +6,7 @@ import CountUp from "@/components/CountUp";
 import HeroBackground from "@/components/HeroBackground";
 import FloatingDashboard from "@/components/FloatingDashboard";
 import HorizontalScrollSection from "@/components/HorizontalScrollSection";
+import ConnectWithUs from "@/components/ConnectWithUs";
 
 const services = [
   { icon: Search, title: "Search Engine Optimization", desc: "Dominate organic search with data-backed SEO strategies that drive sustainable traffic growth." },
@@ -204,6 +205,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Connect With Us */}
+      <ConnectWithUs />
 
       {/* CTA */}
       <section className="py-24">
