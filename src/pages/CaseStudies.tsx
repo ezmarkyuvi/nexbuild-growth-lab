@@ -112,7 +112,7 @@ const CaseStudies = () => (
     {caseStudies.map((cs, i) => (
       <section key={cs.title} className={`py-20 md:py-28 ${i % 2 === 1 ? "bg-secondary" : ""}`}>
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-6xl mx-auto bg-card border border-border rounded-3xl p-8 md:p-12 shadow-card">
+          <div className="max-w-6xl mx-auto bg-card border border-border rounded-3xl p-8 md:p-12 shadow-card hover:shadow-card-hover hover:border-accent/20 hover:-translate-y-1 transition-all duration-300">
             {/* Header row */}
             <AnimatedSection>
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-12">
