@@ -78,7 +78,7 @@ const Index = () => {
             >
               <Link to="/contact">
                 <motion.div
-                  whileHover={{ scale: 1.04, boxShadow: "0 0 40px rgba(59, 130, 246, 0.3)" }}
+                  whileHover={{ scale: 1.04, boxShadow: "0 0 40px rgba(234, 120, 28, 0.3)" }}
                   whileTap={{ scale: 0.97 }}
                   className="bg-gradient-primary text-accent-foreground px-8 py-3.5 rounded-xl text-sm font-semibold flex items-center gap-2 group"
                 >

@@ -44,7 +44,7 @@ const HeroBackground = () => {
 
         ctx.beginPath();
         ctx.arc(x + offsetX, y + offsetY, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(59, 130, 246, ${alpha})`;
+        ctx.fillStyle = `rgba(234, 120, 28, ${alpha})`;
         ctx.fill();
 
         // Draw connecting lines near mouse
@@ -61,7 +61,7 @@ const HeroBackground = () => {
               ctx.beginPath();
               ctx.moveTo(x + offsetX, y + offsetY);
               ctx.lineTo(nx + nInfluence * ndx * 0.08, ny + nInfluence * ndy * 0.08);
-              ctx.strokeStyle = `rgba(59, 130, 246, ${Math.min(influence, nInfluence) * 0.2})`;
+              ctx.strokeStyle = `rgba(234, 120, 28, ${Math.min(influence, nInfluence) * 0.2})`;
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
@@ -78,7 +78,7 @@ const HeroBackground = () => {
               ctx.beginPath();
               ctx.moveTo(x + offsetX, y + offsetY);
               ctx.lineTo(nx + nInfluence * ndx * 0.08, ny + nInfluence * ndy * 0.08);
-              ctx.strokeStyle = `rgba(59, 130, 246, ${Math.min(influence, nInfluence) * 0.2})`;
+              ctx.strokeStyle = `rgba(234, 120, 28, ${Math.min(influence, nInfluence) * 0.2})`;
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
@@ -92,8 +92,8 @@ const HeroBackground = () => {
       const ox = w * (0.2 + k * 0.3) + Math.sin(time * 0.5 + k * 2) * 60;
       const oy = h * (0.3 + k * 0.15) + Math.cos(time * 0.4 + k * 1.5) * 40;
       const gradient = ctx.createRadialGradient(ox, oy, 0, ox, oy, 120 + k * 30);
-      gradient.addColorStop(0, k === 1 ? "rgba(139, 92, 246, 0.08)" : "rgba(59, 130, 246, 0.08)");
-      gradient.addColorStop(1, "rgba(59, 130, 246, 0)");
+      gradient.addColorStop(0, k === 1 ? "rgba(204, 60, 30, 0.08)" : "rgba(234, 120, 28, 0.08)");
+      gradient.addColorStop(1, "rgba(234, 120, 28, 0)");
       ctx.beginPath();
       ctx.arc(ox, oy, 120 + k * 30, 0, Math.PI * 2);
       ctx.fillStyle = gradient;
