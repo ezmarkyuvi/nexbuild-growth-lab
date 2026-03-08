@@ -206,8 +206,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Connect With Us */}
-      <ConnectWithUs />
+      {/* Growth Engine */}
+      <GrowthEngine />
 
       {/* CTA */}
       <section className="py-24">
