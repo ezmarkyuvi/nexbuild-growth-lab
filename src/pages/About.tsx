@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, FlaskConical, Target, BarChart3, Lightbulb, Beaker } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
+import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 
 const values = [
   { icon: FlaskConical, title: "The Labs Model", desc: "We treat marketing like a science — every campaign is an experiment, every result a data point. This iterative approach eliminates guesswork and compounds growth." },
