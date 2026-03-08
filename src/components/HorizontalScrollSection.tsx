@@ -47,6 +47,7 @@ const cards = [
 const HorizontalScrollSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
