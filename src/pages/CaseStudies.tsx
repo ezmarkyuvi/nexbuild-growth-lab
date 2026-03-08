@@ -110,9 +110,9 @@ const CaseStudies = () => (
 
     {/* Case Studies */}
     {caseStudies.map((cs, i) => (
-      <section key={cs.title} className="py-20 md:py-28 border-b border-border last:border-b-0">
+      <section key={cs.title} className={`py-20 md:py-28 ${i % 2 === 1 ? "bg-secondary" : ""}`}>
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto bg-card border border-border rounded-3xl p-8 md:p-12 shadow-card">
             {/* Header row */}
             <AnimatedSection>
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-12">
@@ -139,12 +139,12 @@ const CaseStudies = () => (
             </AnimatedSection>
 
             {/* Main content grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-10">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
               {/* Problem & Strategy */}
               <AnimatedSection className="lg:col-span-2 space-y-6" delay={0.1}>
                 <motion.div
                   whileHover={{ y: -2 }}
-                  className="bg-card border border-border rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300"
+                  className="bg-secondary border border-border rounded-2xl p-6 transition-all duration-300"
                 >
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-destructive" />
@@ -155,7 +155,7 @@ const CaseStudies = () => (
 
                 <motion.div
                   whileHover={{ y: -2 }}
-                  className="bg-card border border-border rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300"
+                  className="bg-secondary border border-border rounded-2xl p-6 transition-all duration-300"
                 >
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-accent" />
@@ -167,7 +167,7 @@ const CaseStudies = () => (
 
               {/* Chart + Results */}
               <AnimatedSection className="lg:col-span-3" delay={0.2}>
-                <div className="bg-card border border-border rounded-2xl shadow-card overflow-hidden h-full">
+                <div className="bg-secondary border border-border rounded-2xl overflow-hidden h-full">
                   {/* Mini chart */}
                   <div className="px-6 pt-6 pb-2">
                     <div className="flex items-center justify-between mb-4">
@@ -183,7 +183,7 @@ const CaseStudies = () => (
                   </div>
 
                   {/* Results row */}
-                  <div className="border-t border-border bg-secondary/30 p-6">
+                  <div className="border-t border-border bg-muted/30 p-6">
                     <div className="grid grid-cols-3 gap-4">
                       {cs.results.map((r, j) => (
                         <motion.div
