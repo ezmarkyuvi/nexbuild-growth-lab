@@ -125,9 +125,9 @@ const ConnectWithUs = () => {
         </p>
 
         {/* Central browser window + orbiting icons */}
-        <div ref={containerRef} className="relative flex items-center justify-center" style={{ minHeight: "420px" }}>
-          {/* Browser window */}
-          <div className="relative w-72 md:w-96 bg-card border border-border rounded-2xl shadow-card overflow-hidden z-10">
+        <div ref={containerRef} className="relative flex items-center justify-center" style={{ minHeight: "500px" }}>
+          {/* Browser window — full width */}
+          <div className="relative w-full max-w-3xl bg-card border border-border rounded-2xl shadow-card overflow-hidden z-10">
             {/* Title bar */}
             <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/50">
               <div className="flex gap-1.5">
