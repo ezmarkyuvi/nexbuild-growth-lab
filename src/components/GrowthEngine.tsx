@@ -154,8 +154,8 @@ const GrowthEngine = () => {
                 rotate: `${Math.atan2(channel.end.y, channel.end.x) * (180 / Math.PI)}deg`,
               }}
               initial={{ opacity: 0, scaleX: 0 }}
-              animate={isInView ? { opacity: 0.3, scaleX: 1 } : {}}
-              transition={{ duration: 0.8, delay: 1.2 + i * 0.08 }}
+              animate={isInView ? { opacity: 0.3, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+              transition={{ duration: 0.8, delay: i * 0.08 }}
             >
               <div className="w-full h-px bg-gradient-to-r from-accent/40 to-transparent" />
             </motion.div>
