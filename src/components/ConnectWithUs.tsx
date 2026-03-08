@@ -88,12 +88,12 @@ const ConnectWithUs = () => {
         rotation: 0,
         scale: 1,
         opacity: 1,
-        ease: "power3.out",
+        ease: "power2.inOut",
         scrollTrigger: {
           trigger: section,
-          start: "top 85%",
-          end: "center center",
-          scrub: 0.8,
+          start: "top 90%",
+          end: "bottom 60%",
+          scrub: 2.5,
         },
       });
       if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
