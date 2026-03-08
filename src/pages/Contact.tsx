@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { ArrowRight, Mail, Send } from "lucide-react";
+import { ArrowRight, Mail, Send, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
+import DarkHero from "@/components/DarkHero";
 import { toast } from "sonner";
 
 const Contact = () => {
