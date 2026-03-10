@@ -47,7 +47,7 @@ serve(async (req) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'NexBuild Labs <noreply@nexbuildlabs.com>',
+          from: 'NexBuild Labs <onboarding@resend.dev>',
           to: ['contact.nexbuildlabs@gmail.com'],
           subject: `New Growth Audit Request from ${name}`,
           html: `
