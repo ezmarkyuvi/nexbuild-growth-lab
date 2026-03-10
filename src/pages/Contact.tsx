@@ -102,10 +102,10 @@ const Contact = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-gradient-primary text-accent-foreground py-3 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-primary text-accent-foreground py-3 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  Submit Audit Request
-                  <ArrowRight size={16} />
+                  {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> Sending...</> : <>Submit Audit Request <ArrowRight size={16} /></>}
                 </motion.button>
               </form>
             </AnimatedSection>
