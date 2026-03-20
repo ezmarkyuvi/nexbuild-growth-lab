@@ -48,7 +48,7 @@ serve(async (req) => {
         },
         body: JSON.stringify({
           from: 'NexBuild Labs <onboarding@resend.dev>',
-          to: ['contact.nexbuildlabs@gmail.com'],
+          to: ['business@nexbuildlabs.com'],
           subject: `New Growth Audit Request from ${name}`,
           html: `
             <h2>New Contact Form Submission</h2>
