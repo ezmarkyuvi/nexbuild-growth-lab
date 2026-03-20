@@ -4,10 +4,10 @@ import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
 
 const values = [
-{ icon: FlaskConical, title: "The Labs Model", desc: "We treat marketing like a science — every campaign is an experiment, every result a data point. This iterative approach eliminates guesswork and compounds growth." },
-{ icon: Target, title: "Data-Driven Decisions", desc: "Every strategy is backed by data, every optimization informed by analytics. We don't guess — we test, measure, and scale what works." },
+{ icon: FlaskConical, title: "The Labs Model", desc: "We treat marketing like a science every campaign is an experiment, every result a data point. This iterative approach eliminates guesswork and compounds growth." },
+{ icon: Target, title: "Data-Driven Decisions", desc: "Every strategy is backed by data, every optimization informed by analytics. We don't guess we test, measure, and scale what works." },
 { icon: BarChart3, title: "Growth Systems", desc: "We build repeatable marketing systems, not one-off campaigns. Systems that generate predictable, scalable results month after month." },
-{ icon: Lightbulb, title: "Innovation First", desc: "We stay ahead of the curve with emerging channels, AI tools, and growth tactics — giving our clients an unfair advantage." }];
+{ icon: Lightbulb, title: "Innovation First", desc: "We stay ahead of the curve with emerging channels, AI tools, and growth tactics giving our clients an unfair advantage." }];
 
 
 const About = () =>
