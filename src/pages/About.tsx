@@ -4,20 +4,20 @@ import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
 
 const values = [
-  { icon: FlaskConical, title: "The Labs Model", desc: "We treat marketing like a science — every campaign is an experiment, every result a data point. This iterative approach eliminates guesswork and compounds growth." },
-  { icon: Target, title: "Data-Driven Decisions", desc: "Every strategy is backed by data, every optimization informed by analytics. We don't guess — we test, measure, and scale what works." },
-  { icon: BarChart3, title: "Growth Systems", desc: "We build repeatable marketing systems, not one-off campaigns. Systems that generate predictable, scalable results month after month." },
-  { icon: Lightbulb, title: "Innovation First", desc: "We stay ahead of the curve with emerging channels, AI tools, and growth tactics — giving our clients an unfair advantage." },
-];
+{ icon: FlaskConical, title: "The Labs Model", desc: "We treat marketing like a science — every campaign is an experiment, every result a data point. This iterative approach eliminates guesswork and compounds growth." },
+{ icon: Target, title: "Data-Driven Decisions", desc: "Every strategy is backed by data, every optimization informed by analytics. We don't guess — we test, measure, and scale what works." },
+{ icon: BarChart3, title: "Growth Systems", desc: "We build repeatable marketing systems, not one-off campaigns. Systems that generate predictable, scalable results month after month." },
+{ icon: Lightbulb, title: "Innovation First", desc: "We stay ahead of the curve with emerging channels, AI tools, and growth tactics — giving our clients an unfair advantage." }];
 
-const About = () => (
-  <div className="min-h-screen pt-16">
+
+const About = () =>
+<div className="min-h-screen pt-16">
     <DarkHero
-      badge="Who We Are"
-      badgeIcon={<Beaker size={14} className="text-electric" />}
-      title={<>About <span className="text-electric">NexBuildLabs</span></>}
-      subtitle="We're a digital growth lab on a mission to help ambitious businesses scale through data-driven marketing systems."
-    />
+    badge="Who We Are"
+    badgeIcon={<Beaker size={14} className="text-electric" />}
+    title={<>About <span className="text-electric">NexBuildLabs</span></>}
+    subtitle="We're a digital growth lab on a mission to help ambitious businesses scale through data-driven marketing systems." />
+  
 
     {/* Mission */}
     <section className="py-24">
@@ -25,10 +25,10 @@ const About = () => (
         <AnimatedSection>
           <div className="max-w-3xl mx-auto bg-card border border-border rounded-3xl p-8 md:p-12 shadow-card hover:shadow-card-hover hover:border-accent/20 hover:-translate-y-1 transition-all duration-300 text-center">
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Our Mission</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              To democratize growth by giving startups and businesses access to enterprise-grade marketing systems, 
-              performance strategies, and digital infrastructure — powered by data, driven by experimentation.
-            </p>
+            <p className="text-muted-foreground text-lg leading-relaxed">To democratize growth by giving startups and businesses access to enterprise-grade marketing systems, performance strategies, and digital infrastructure powered by data, driven by experimentation.
+
+
+          </p>
           </div>
         </AnimatedSection>
       </div>
@@ -43,8 +43,8 @@ const About = () => (
         </AnimatedSection>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {values.map((v, i) => (
-            <AnimatedSection key={v.title} delay={i * 0.1}>
+          {values.map((v, i) =>
+        <AnimatedSection key={v.title} delay={i * 0.1}>
               <div className="bg-card border border-border rounded-2xl p-8 shadow-card hover:shadow-card-hover hover:border-accent/20 hover:-translate-y-1 transition-all duration-300 h-full">
                 <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5">
                   <v.icon className="text-accent" size={24} />
@@ -53,7 +53,7 @@ const About = () => (
                 <p className="text-muted-foreground text-sm leading-relaxed">{v.desc}</p>
               </div>
             </AnimatedSection>
-          ))}
+        )}
         </div>
       </div>
     </section>
@@ -69,7 +69,7 @@ const About = () => (
         </AnimatedSection>
       </div>
     </section>
-  </div>
-);
+  </div>;
+
 
 export default About;
