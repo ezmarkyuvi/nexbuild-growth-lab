@@ -4,22 +4,41 @@ import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+
+const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx9Bpxk_YDmUcKQm6vBizuptvf7eRdQchRNQ_EWe3tMTZ8IFBYEBBH-ai0PO0ZHhhqitQ/exec";
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", company: "", website: "", goals: "" });
+  const [form, setForm] = useState({
+    company_name: "",
+    contact_person: "",
+    phone_number: "",
+    email: "",
+    service_needed: "",
+    notes: "",
+    budget: ""
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: form
+      const res = await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form)
       });
-      if (error) throw error;
+      if (!res.ok) throw new Error("Failed to submit");
       toast.success("Thank you! We'll be in touch within 24 hours.");
-      setForm({ name: "", email: "", company: "", website: "", goals: "" });
+      setForm({
+        company_name: "",
+        contact_person: "",
+        phone_number: "",
+        email: "",
+        service_needed: "",
+        notes: "",
+        budget: ""
+      });
     } catch (err) {
       console.error('Submit error:', err);
       toast.error("Something went wrong. Please try again.");
@@ -70,33 +89,80 @@ const Contact = () => {
 
             <AnimatedSection delay={0.1}>
               <form onSubmit={handleSubmit} className="bg-secondary border border-border rounded-2xl p-8 space-y-5">
-                {[
-                { label: "Name", key: "name", type: "text", placeholder: "Your full name" },
-                { label: "Email", key: "email", type: "email", placeholder: "you@company.com" },
-                { label: "Company", key: "company", type: "text", placeholder: "Your company name" },
-                { label: "Website", key: "website", type: "url", placeholder: "https://yoursite.com" }].
-                map((field) =>
-                <div key={field.key}>
-                    <label className="block text-sm font-medium mb-1.5">{field.label}</label>
-                    <input
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    required={field.key === "name" || field.key === "email"}
-                    value={form[field.key as keyof typeof form]}
-                    onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow" />
-                  
-                  </div>
-                )}
                 <div>
-                  <label className="block text-sm font-medium mb-1.5">Marketing Goals</label>
+                  <label className="block text-sm font-medium mb-1.5">Company Name</label>
+                  <input
+                    type="text"
+                    placeholder="Your company name"
+                    required
+                    value={form.company_name}
+                    onChange={e => setForm({ ...form, company_name: e.target.value })}
+                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5">Contact Person</label>
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    required
+                    value={form.contact_person}
+                    onChange={e => setForm({ ...form, contact_person: e.target.value })}
+                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5">Phone Number</label>
+                  <input
+                    type="tel"
+                    placeholder="Your phone number"
+                    required
+                    value={form.phone_number}
+                    onChange={e => setForm({ ...form, phone_number: e.target.value })}
+                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5">Email</label>
+                  <input
+                    type="email"
+                    placeholder="you@company.com"
+                    required
+                    value={form.email}
+                    onChange={e => setForm({ ...form, email: e.target.value })}
+                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5">Service Needed</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. SEO, Web Design"
+                    required
+                    value={form.service_needed}
+                    onChange={e => setForm({ ...form, service_needed: e.target.value })}
+                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5">Notes</label>
                   <textarea
-                    placeholder="Tell us about your growth goals..."
-                    rows={4}
-                    value={form.goals}
-                    onChange={(e) => setForm({ ...form, goals: e.target.value })}
-                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow resize-none" />
-                  
+                    placeholder="Tell us more..."
+                    rows={3}
+                    value={form.notes}
+                    onChange={e => setForm({ ...form, notes: e.target.value })}
+                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow resize-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5">Budget</label>
+                  <input
+                    type="text"
+                    placeholder="Your budget"
+                    value={form.budget}
+                    onChange={e => setForm({ ...form, budget: e.target.value })}
+                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                  />
                 </div>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
@@ -104,7 +170,6 @@ const Contact = () => {
                   type="submit"
                   disabled={isSubmitting}
                   className="w-full bg-gradient-primary text-accent-foreground py-3 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50">
-                  
                   {isSubmitting ? <><Loader2 size={16} className="animate-spin" /> Sending...</> : <>Submit Audit Request <ArrowRight size={16} /></>}
                 </motion.button>
               </form>

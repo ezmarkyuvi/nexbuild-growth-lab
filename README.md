@@ -71,3 +71,31 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+## Google Sheets Integration (Contact Form)
+
+Contact submissions already go through the Supabase Edge Function `send-contact-email`.
+You can also push each submission to Google Sheets by configuring a webhook.
+
+1. Create a Google Sheet with columns in this order:
+	- submitted_at
+	- name
+	- email
+	- company
+	- website
+	- goals
+	- source
+2. In Google Apps Script, publish a Web App that accepts POST JSON and appends a row.
+3. Add the webhook URL as a Supabase function secret:
+
+```sh
+supabase secrets set GOOGLE_SHEETS_WEBHOOK_URL="https://script.google.com/macros/s/REPLACE/exec"
+```
+
+4. Deploy the function:
+
+```sh
+supabase functions deploy send-contact-email
+```
+
+If `GOOGLE_SHEETS_WEBHOOK_URL` is not configured, the function still stores the lead in Postgres.
