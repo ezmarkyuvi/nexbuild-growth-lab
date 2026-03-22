@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ArrowRight, Mail, Send, MessageCircle, Loader2 } from "lucide-react";
+import { useRef, useState } from "react";
+import { ArrowRight, Mail, Send, MessageCircle, Loader2, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
@@ -7,29 +7,81 @@ import { toast } from "sonner";
 
 const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwulK7LFD3id6Ml-8HsMAVygOeNa4kv5jqbbmbOt9lBvT5bdGCke2JmhDxk43-XFm_-8w/exec";
 
+const SERVICE_OPTIONS = [
+  "SEO",
+  "SMM",
+  "Web dev",
+  "App dev",
+  "Design",
+  "Project Management",
+  "Content Management",
+  "Social Media",
+];
+
 const Contact = () => {
   const [form, setForm] = useState({
     company_name: "",
     contact_person: "",
     phone_number: "",
     email: "",
-    service_needed: "",
+    website: "",
+    service_needed: [] as string[],
     notes: "",
-    budget: ""
+    budget_currency: "USD",
+    budget_amount: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const servicesScrollRef = useRef<HTMLDivElement | null>(null);
+
+  const toggleService = (service: string) => {
+    setForm((prev) => ({
+      ...prev,
+      service_needed: prev.service_needed.includes(service)
+        ? prev.service_needed.filter((s) => s !== service)
+        : [...prev.service_needed, service],
+    }));
+  };
+
+  const selectedServicesText =
+    form.service_needed.length > 0 ? form.service_needed.join(", ") : "Select one or more services";
+
+  const handleServicesWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    const container = servicesScrollRef.current;
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!container) return;
+
+    container.scrollTop += e.deltaY;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (form.service_needed.length === 0) {
+      toast.error("Please select at least one service.");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
+      const payload = {
+        company_name: form.company_name,
+        contact_person: form.contact_person,
+        phone_number: form.phone_number,
+        email: form.email,
+        website: form.website,
+        service_needed: form.service_needed.join(", "),
+        notes: form.notes,
+        budget: `${form.budget_currency} ${form.budget_amount}`,
+      };
+
       await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
         method: "POST",
         // Apps Script web apps often fail CORS preflight from static sites.
         // Use a simple request and no-cors so the browser sends the payload.
         mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       toast.success("Thank you! We'll be in touch within 24 hours.");
       setForm({
@@ -37,9 +89,11 @@ const Contact = () => {
         contact_person: "",
         phone_number: "",
         email: "",
-        service_needed: "",
+        website: "",
+        service_needed: [],
         notes: "",
-        budget: ""
+        budget_currency: "USD",
+        budget_amount: ""
       });
     } catch (err) {
       console.error('Submit error:', err);
@@ -92,24 +146,15 @@ const Contact = () => {
             <AnimatedSection delay={0.1}>
               <form onSubmit={handleSubmit} className="bg-secondary border border-border rounded-2xl p-8 space-y-5">
                 <div>
-                  <label className="block text-sm font-medium mb-1.5">Company Name</label>
-                  <input
-                    type="text"
-                    placeholder="Your company name"
-                    required
-                    value={form.company_name}
-                    onChange={e => setForm({ ...form, company_name: e.target.value })}
-                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1.5">Contact Person</label>
+                  <label className="block text-sm font-medium mb-1.5">Name</label>
                   <input
                     type="text"
                     placeholder="Your name"
                     required
                     value={form.contact_person}
                     onChange={e => setForm({ ...form, contact_person: e.target.value })}
+                    pattern="^[A-Za-z\s.'-]+$"
+                    title="Use letters only (spaces and . ' - are allowed)."
                     className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
                   />
                 </div>
@@ -121,6 +166,8 @@ const Contact = () => {
                     required
                     value={form.phone_number}
                     onChange={e => setForm({ ...form, phone_number: e.target.value })}
+                    pattern="^[0-9+()\-\s]{7,20}$"
+                    title="Enter a valid phone number."
                     className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
                   />
                 </div>
@@ -132,19 +179,65 @@ const Contact = () => {
                     required
                     value={form.email}
                     onChange={e => setForm({ ...form, email: e.target.value })}
+                    pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                    title="Enter a valid email address."
                     className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1.5">Service Needed</label>
+                  <label className="block text-sm font-medium mb-1.5">Company Name</label>
                   <input
                     type="text"
-                    placeholder="e.g. SEO, Web Design"
+                    placeholder="Your company name"
                     required
-                    value={form.service_needed}
-                    onChange={e => setForm({ ...form, service_needed: e.target.value })}
+                    value={form.company_name}
+                    onChange={e => setForm({ ...form, company_name: e.target.value })}
+                    pattern="^[A-Za-z0-9\s&.,'-]+$"
+                    title="Use letters and numbers only (basic symbols like & . , ' - allowed)."
                     className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
                   />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5">Website</label>
+                  <input
+                    type="url"
+                    placeholder="https://example.com"
+                    required
+                    value={form.website}
+                    onChange={e => setForm({ ...form, website: e.target.value })}
+                    pattern="https?://.+"
+                    title="Enter a valid URL starting with http:// or https://"
+                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1.5">Services Needed (Multi Select)</label>
+                  <details className="group">
+                    <summary className="list-none w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm cursor-pointer flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-ring transition-shadow">
+                      <span className="truncate pr-3">{selectedServicesText}</span>
+                      <ChevronDown size={16} className="shrink-0 transition-transform group-open:rotate-180" />
+                    </summary>
+
+                    <div
+                      ref={servicesScrollRef}
+                      onWheelCapture={handleServicesWheel}
+                      onWheel={handleServicesWheel}
+                      className="mt-2 border border-border rounded-lg bg-background p-3 max-h-56 overflow-y-auto overscroll-contain space-y-2"
+                    >
+                      {SERVICE_OPTIONS.map((service) => (
+                        <label key={service} className="flex items-center gap-2 text-sm cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={form.service_needed.includes(service)}
+                            onChange={() => toggleService(service)}
+                            className="h-4 w-4 rounded border-border"
+                          />
+                          <span>{service}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </details>
+                  <p className="text-xs text-muted-foreground mt-1">Choose all services you need.</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1.5">Notes</label>
@@ -158,13 +251,27 @@ const Contact = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1.5">Budget</label>
-                  <input
-                    type="text"
-                    placeholder="Your budget"
-                    value={form.budget}
-                    onChange={e => setForm({ ...form, budget: e.target.value })}
-                    className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
-                  />
+                  <div className="grid grid-cols-3 gap-3">
+                    <select
+                      title="Budget Currency"
+                      value={form.budget_currency}
+                      onChange={e => setForm({ ...form, budget_currency: e.target.value })}
+                      className="col-span-1 bg-background border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                    >
+                      <option value="USD">USD ($)</option>
+                      <option value="INR">INR (Rs)</option>
+                    </select>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      required
+                      placeholder="Amount"
+                      value={form.budget_amount}
+                      onChange={e => setForm({ ...form, budget_amount: e.target.value })}
+                      className="col-span-2 bg-background border border-border rounded-lg px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-shadow"
+                    />
+                  </div>
                 </div>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
