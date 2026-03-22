@@ -5,7 +5,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
 import { toast } from "sonner";
 
-const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx9Bpxk_YDmUcKQm6vBizuptvf7eRdQchRNQ_EWe3tMTZ8IFBYEBBH-ai0PO0ZHhhqitQ/exec";
+const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwulK7LFD3id6Ml-8HsMAVygOeNa4kv5jqbbmbOt9lBvT5bdGCke2JmhDxk43-XFm_-8w/exec";
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -23,12 +23,14 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const res = await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+      await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
+        // Apps Script web apps often fail CORS preflight from static sites.
+        // Use a simple request and no-cors so the browser sends the payload.
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(form),
       });
-      if (!res.ok) throw new Error("Failed to submit");
       toast.success("Thank you! We'll be in touch within 24 hours.");
       setForm({
         company_name: "",
