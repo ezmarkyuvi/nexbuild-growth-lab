@@ -202,7 +202,6 @@ const Contact = () => {
                   <input
                     type="url"
                     placeholder="https://example.com"
-                    required
                     value={form.website}
                     onChange={e => setForm({ ...form, website: e.target.value })}
                     pattern="https?://.+"
