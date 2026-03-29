@@ -47,7 +47,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
             >
-              <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 mb-8 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 mt-6 mb-8 backdrop-blur-sm">
                 <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
                 <span className="text-xs font-medium text-accent">Digital Growth Lab</span>
               </div>
