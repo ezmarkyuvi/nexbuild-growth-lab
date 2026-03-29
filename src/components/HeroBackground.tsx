@@ -129,6 +129,8 @@ const HeroBackground = ({ className = "", opacity = 0.8, withOrbs = true }: Hero
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const parentElement = canvas.parentElement;
+    if (!parentElement) return;
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -167,6 +169,9 @@ const HeroBackground = ({ className = "", opacity = 0.8, withOrbs = true }: Hero
       hasPointerRef.current = false;
     };
 
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(parentElement);
+
     resize();
     window.addEventListener("resize", resize);
     window.addEventListener("mousemove", handleMouseMove);
@@ -175,6 +180,7 @@ const HeroBackground = ({ className = "", opacity = 0.8, withOrbs = true }: Hero
     animRef.current = requestAnimationFrame(draw);
 
     return () => {
+      resizeObserver.disconnect();
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);
