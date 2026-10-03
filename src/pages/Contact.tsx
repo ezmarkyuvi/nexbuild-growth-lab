@@ -51,10 +51,6 @@ const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 
 const Contact = () => {
   const { data: cmsPage } = usePublishedPage("contact");
-  if (cmsPage?.page.layout_mode === "cms" && cmsPage.sections.length > 0) {
-    return <CmsPageRenderer title={cmsPage.page.title} sections={cmsPage.sections} />;
-  }
-
   const [form, setForm] = useState({
     company_name: "",
     contact_person: "",
@@ -231,6 +227,10 @@ const Contact = () => {
           setIsSubmitting(false);
         }
       };
+
+      if (cmsPage?.page.layout_mode === "cms" && cmsPage.sections.length > 0) {
+        return <CmsPageRenderer title={cmsPage.page.title} sections={cmsPage.sections} />;
+      }
 
       return (
         <div className="min-h-screen pt-16">
