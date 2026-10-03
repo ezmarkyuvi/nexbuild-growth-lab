@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import {
   ArrowLeft,
   ArrowRight,
@@ -12,11 +13,20 @@ import {
   TrendingUp,
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import { blogPosts } from "@/data/blogPosts";
+import { getPostBySlug } from "@/lib/cms/service";
 
 const BlogPost = () => {
   const { slug } = useParams();
-  const post = blogPosts.find((item) => item.slug === slug);
+  const { data: post } = useQuery({
+    queryKey: ["public", "blog-post", slug],
+    queryFn: () => getPostBySlug(slug || ""),
+    enabled: Boolean(slug),
+  });
+
+  const sections =
+    post?.content_json && typeof post.content_json === "object" && !Array.isArray(post.content_json)
+      ? ((post.content_json as { sections?: Array<{ heading: string; paragraphs: string[]; bullets?: string[] }> }).sections ?? [])
+      : [];
 
   if (!post) {
     return (
@@ -65,11 +75,11 @@ const BlogPost = () => {
             </Link>
 
             <div className="text-sm text-muted-foreground mb-8">
-              Published: {new Date(post.publishedAt).toLocaleDateString()}
+              Published: {new Date(post.published_at || post.created_at).toLocaleDateString()}
             </div>
 
             <article className="space-y-10">
-              {post.sections.map((section) => (
+              {sections.map((section) => (
                 <section key={section.heading} className="space-y-4">
                   <h2 className="text-2xl font-heading font-bold border-l-4 border-accent pl-4">{section.heading}</h2>
                   {section.paragraphs.map((paragraph, idx) => (

@@ -99,3 +99,23 @@ supabase functions deploy send-contact-email
 ```
 
 If `GOOGLE_SHEETS_WEBHOOK_URL` is not configured, the function still stores the lead in Postgres.
+
+## Admin CMS Panel
+
+This project now includes a self-managed admin panel at `/admin` to manage:
+
+- Pages + CMS sections
+- Blog posts
+- Media assets
+- Navigation menus
+- Site settings
+- Lead statuses
+
+### Setup
+
+1. Run `/home/runner/work/nexbuild-growth-lab/nexbuild-growth-lab/supabase/sql/admin_cms_schema.sql` in Supabase SQL editor.
+2. Create an authenticated user in Supabase Auth.
+3. Insert the user ID into `public.admin_users` as `super_admin`.
+4. Set `VITE_GOOGLE_SHEETS_WEBHOOK_URL` in frontend env for contact webhook submissions.
+
+Without CMS data, the website uses built-in fallback content.

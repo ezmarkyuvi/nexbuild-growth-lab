@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, TrendingUp, Search, BarChart3, Layers, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
-import CountUp from "@/components/CountUp";
+import CmsPageRenderer from "@/components/cms/CmsPageRenderer";
+import { usePublishedPage } from "@/hooks/usePublishedPage";
 
 const caseStudies = [
   {
@@ -84,7 +85,13 @@ const MiniChart = ({ data, color }: { data: number[]; color: string }) => {
   );
 };
 
-const CaseStudies = () => (
+const CaseStudies = () => {
+  const { data: cmsPage } = usePublishedPage("case-studies");
+  if (cmsPage?.page.layout_mode === "cms" && cmsPage.sections.length > 0) {
+    return <CmsPageRenderer title={cmsPage.page.title} sections={cmsPage.sections} />;
+  }
+
+  return (
   <div className="min-h-screen pt-16">
     {/* Hero */}
     <section className="py-28 bg-navy text-primary-foreground relative overflow-hidden">
@@ -237,6 +244,7 @@ const CaseStudies = () => (
       </div>
     </section>
   </div>
-);
+  );
+};
 
 export default CaseStudies;
