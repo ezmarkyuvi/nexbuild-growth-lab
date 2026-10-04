@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
-import { blogPosts } from "@/data/blogPosts";
+import { getPublishedPosts } from "@/lib/cms/service";
+import { fallbackPostsFromStatic } from "@/lib/cms/fallbackContent";
 
-const Blog = () => (
-  <div className="min-h-screen pt-16">
+const Blog = () => {
+  const { data: posts = fallbackPostsFromStatic } = useQuery({
+    queryKey: ["public", "blog-posts"],
+    queryFn: getPublishedPosts,
+  });
+
+  return (
+    <div className="min-h-screen pt-16">
     <DarkHero
       badge="Insights & Tactics"
       badgeIcon={<BookOpen size={14} className="text-electric" />}
@@ -26,7 +34,7 @@ const Blog = () => (
         </AnimatedSection>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogPosts.map((post, i) => (
+          {posts.map((post, i) => (
             <AnimatedSection key={post.title} delay={i * 0.05}>
               <Link to={`/blog/${post.slug}`} className="block h-full">
                 <motion.div
@@ -54,6 +62,7 @@ const Blog = () => (
       </div>
     </section>
   </div>
-);
+  );
+};
 
 export default Blog;

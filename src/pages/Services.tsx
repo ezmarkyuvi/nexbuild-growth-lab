@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { Search, BarChart3, Globe, FileText, ArrowRight, CheckCircle, Layers } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
+import CmsPageRenderer from "@/components/cms/CmsPageRenderer";
+import { usePublishedPage } from "@/hooks/usePublishedPage";
 
 const services = [
   {
@@ -38,7 +40,13 @@ const services = [
   },
 ];
 
-const Services = () => (
+const Services = () => {
+  const { data: cmsPage } = usePublishedPage("services");
+  if (cmsPage?.page.layout_mode === "cms" && cmsPage.sections.length > 0) {
+    return <CmsPageRenderer title={cmsPage.page.title} sections={cmsPage.sections} />;
+  }
+
+  return (
   <div className="min-h-screen pt-16">
     {/* Hero */}
     <DarkHero
@@ -109,6 +117,7 @@ const Services = () => (
       </div>
     </section>
   </div>
-);
+  );
+};
 
 export default Services;

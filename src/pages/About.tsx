@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, FlaskConical, Target, BarChart3, Lightbulb, Beaker } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
+import CmsPageRenderer from "@/components/cms/CmsPageRenderer";
+import { usePublishedPage } from "@/hooks/usePublishedPage";
 
 const values = [
 { icon: FlaskConical, title: "The Labs Model", desc: "We treat marketing like a science every campaign is an experiment, every result a data point. This iterative approach eliminates guesswork and compounds growth." },
@@ -10,8 +12,13 @@ const values = [
 { icon: Lightbulb, title: "Innovation First", desc: "We stay ahead of the curve with emerging channels, AI tools, and growth tactics giving our clients an unfair advantage." }];
 
 
-const About = () =>
-<div className="min-h-screen pt-16">
+const About = () => {
+const { data: cmsPage } = usePublishedPage("about");
+if (cmsPage?.page.layout_mode === "cms" && cmsPage.sections.length > 0) {
+  return <CmsPageRenderer title={cmsPage.page.title} sections={cmsPage.sections} />;
+}
+
+return <div className="min-h-screen pt-16">
     <DarkHero
     badge="Who We Are"
     badgeIcon={<Beaker size={14} className="text-electric" />}
@@ -70,6 +77,7 @@ const About = () =>
       </div>
     </section>
   </div>;
+};
 
 
 export default About;

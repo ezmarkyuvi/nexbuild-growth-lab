@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import DarkHero from "@/components/DarkHero";
 import HeroBackground from "@/components/HeroBackground";
+import CmsPageRenderer from "@/components/cms/CmsPageRenderer";
+import { usePublishedPage } from "@/hooks/usePublishedPage";
 import { toast } from "sonner";
 
-const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwulK7LFD3id6Ml-8HsMAVygOeNa4kv5jqbbmbOt9lBvT5bdGCke2JmhDxk43-XFm_-8w/exec";
+const GOOGLE_SHEETS_WEBHOOK_URL = import.meta.env.VITE_GOOGLE_SHEETS_WEBHOOK_URL || "";
 
 const PROJECT_OPTIONS = [
   "Business Website",
@@ -48,6 +50,7 @@ type FormErrors = {
 const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
 const Contact = () => {
+  const { data: cmsPage } = usePublishedPage("contact");
   const [form, setForm] = useState({
     company_name: "",
     contact_person: "",
@@ -193,6 +196,10 @@ const Contact = () => {
             budget: "",
           };
 
+          if (!GOOGLE_SHEETS_WEBHOOK_URL) {
+            throw new Error("Contact webhook URL is not configured");
+          }
+
           await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
             method: "POST",
             mode: "no-cors",
@@ -220,6 +227,10 @@ const Contact = () => {
           setIsSubmitting(false);
         }
       };
+
+      if (cmsPage?.page.layout_mode === "cms" && cmsPage.sections.length > 0) {
+        return <CmsPageRenderer title={cmsPage.page.title} sections={cmsPage.sections} />;
+      }
 
       return (
         <div className="min-h-screen pt-16">

@@ -7,6 +7,8 @@ import HeroBackground from "@/components/HeroBackground";
 import FloatingDashboard from "@/components/FloatingDashboard";
 import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 import GrowthEngine from "@/components/GrowthEngine";
+import CmsPageRenderer from "@/components/cms/CmsPageRenderer";
+import { usePublishedPage } from "@/hooks/usePublishedPage";
 
 const services = [
   { icon: Search, title: "Search Engine Optimization", desc: "Dominate organic search with data-backed SEO strategies that drive sustainable traffic growth." },
@@ -30,6 +32,11 @@ const testimonials = [
 ];
 
 const Index = () => {
+  const { data: cmsPage } = usePublishedPage("home");
+  if (cmsPage?.page.layout_mode === "cms" && cmsPage.sections.length > 0) {
+    return <CmsPageRenderer title={cmsPage.page.title} sections={cmsPage.sections} />;
+  }
+
   return (
     <div className="min-h-screen">
       {/* Hero */}
